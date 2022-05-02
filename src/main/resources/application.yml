@@ -1,0 +1,80 @@
+#oracle:
+#  driverClassName: oracle.jdbc.OracleDriver
+#  url: jdbc:oracle:thin:@47.102.140.124:8097:helowin
+#  username: IOM_OCM
+#  password: IOM_OCM
+
+pagehelper:
+  # 设置方言，此处指定 MySQL 数据库
+  helper-dialect: oracle
+  # 是否启动合理化，默认是 false。
+  # 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages（最大页数）会查询最后一页。
+  # 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+  reasonable: true
+  # 是否支持接口参数来传递分页参数，默认false
+  support-methods-arguments: true
+  # 为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值
+  params: count=countSql
+  # 默认值为 false，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）
+  page-size-zero: true
+user:
+  address:
+    max-count: 20
+oracle:
+  driverClassName: oracle.jdbc.OracleDriver
+  url: jdbc:oracle:thin:@localhost:1521:orcl
+  username: CSMIS_WUHAN_CTC_1
+  password: CSMIS_WUHAN_CTC_1
+#tomcat端口
+server:
+  port: 8081
+
+#日志记录级别
+logging:
+  level:
+    com.gh: debug
+    org.springframework: info
+
+#配置数据库连接
+spring:
+  datasource:
+    #    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #    url: jdbc:oracle:thin:@47.102.140.124:8097:helowin
+    #    username: IOM_OCM
+    #    password: IOM_OCM
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: CSMIS_WUHAN_CTC_1
+    password: CSMIS_WUHAN_CTC_1
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  redis:
+    port: 6379
+    host: localhost
+    cache:
+  cache:
+    ehcache:
+      config: classpath:ehcahe.xml
+  web:
+    resources:
+      static-locations:  classpath:/static
+  #热部署配置
+  devtools:
+    restart:
+      enabled: true
+      #设置重启的目录，添加目录的文件需要restart
+      additional-paths: src/main/java
+      #解决项目自动重新编译后接口报404的问题
+      poll-interval: 3000
+      quiet-period: 1000
+mybatis:
+ # 实体类别名包路径
+#  type-aliases-package: com.gh.domain
+  # 映射文件路径
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  # 控制台输出执行sql
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
